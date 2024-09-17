@@ -19,28 +19,6 @@ var i = 0;
 
 mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL});
 
-function pilule(left, top) {
-    left = Math.floor(Math.random() * playgroundWidth);
-    top = Math.floor(Math.random() * playgroundHeight);
-    containerPilule[i].style.left = left + 'px';
-    containerPilule[i].style.top = top + 'px';
-    return Math.floor(Math.random() * (left * top) ) / 100;
-}
-
-pilule();
-
-function pacmanDeplace(right, bottom, top, left) {
-    
-
-
-
-    right = x + step;
-    bottom = y + step;
-    top = y - step;
-    left = x - step;
-}
-
-pilule();
 
 mc.on('swipeleft swiperight swipeup swipedown', (event) => {
 
