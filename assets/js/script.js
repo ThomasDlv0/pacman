@@ -19,33 +19,50 @@ var i = 0;
 
 mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL});
 
+function movePacman(direction) {
+    switch (direction) {
+        case 'left':
+            x = Math.max(0, x - step);
+            pacman.style.left = x + 'px';
+            pacman.style.transform = 'scaleX(-1)';
+            break;
+        case 'right':
+            x = Math.min(playgroundWidth - pacmanSize, x + step);
+            pacman.style.left = x + 'px';
+            pacman.style.transform = 'scaleX(1)';
+            break;
+        case 'up':
+            y = Math.max(0, y - step);
+            pacman.style.top = y + 'px';
+            pacman.style.transform = 'rotate(-90deg)';
+            break;
+        case 'down':
+            y = Math.min(playgroundHeight - pacmanSize, y + step);
+            pacman.style.top = y + 'px';
+            pacman.style.transform = 'rotate(90deg)';
+            break;
+    }
+}
+
 
 mc.on('swipeleft swiperight swipeup swipedown', (event) => {
 
     switch (event.type) {
         // left
         case 'swipeleft':
-            x = Math.max(0, x - step);
-            pacman.style.left = x + 'px';
-            pacman.style.transform = 'scaleX(-1)';
+            movePacman(direction = 'left');
             break;
         // right
         case 'swiperight':
-            x = Math.min(playgroundWidth - pacmanSize, x + step);
-            pacman.style.left = x + 'px';
-            pacman.style.transform = 'scaleX(1)';
+            movePacman(direction = 'right');
             break;
         // up
         case 'swipeup':
-            y = Math.max(0, y - step);
-            pacman.style.top = y + 'px';
-            pacman.style.transform = 'rotate(-90deg)';
+            movePacman(direction = 'up');
             break;
         // down
         case 'swipedown':
-            y = Math.min(playgroundHeight - pacmanSize, y + step);
-            pacman.style.top = y + 'px';
-            pacman.style.transform = 'rotate(90deg)';
+            movePacman(direction = 'down');
             break;
     }
     console.log(event.type);
@@ -56,30 +73,22 @@ document.addEventListener('keyup', (event) => {
         // left
         case 'q':
         case 'ArrowLeft':
-            x = Math.max(0, x - step);
-            pacman.style.left = x + 'px';
-            pacman.style.transform = 'scaleX(-1)';
+            movePacman(direction = 'left');
             break;
         // right
         case 'd':
         case 'ArrowRight':
-            x = Math.min(playgroundWidth - pacmanSize, x + step);
-            pacman.style.left = x + 'px';
-            pacman.style.transform = 'scaleX(1)';
+            movePacman(direction = 'right');
             break;
         // up
         case 'z':
         case 'ArrowUp':
-            y = Math.max(0, y - step);
-            pacman.style.top = y + 'px';
-            pacman.style.transform = 'rotate(-90deg)';
+            movePacman(direction = 'up');
             break;
         // down
         case 's':
         case 'ArrowDown':
-            y = Math.min(playgroundHeight - pacmanSize, y + step);
-            pacman.style.top = y + 'px';
-            pacman.style.transform = 'rotate(90deg)';
+            movePacman(direction = 'down');
             break;
     }
 });
